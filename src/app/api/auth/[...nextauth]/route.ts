@@ -48,7 +48,6 @@ const handler = NextAuth({
                     ...token,
                     accessToken: account.access_token,
                     userId: user.id,
-                    userRole: user.role,
                 };
             }
             return token;
