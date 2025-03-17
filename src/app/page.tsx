@@ -1,14 +1,19 @@
+// use client to use the session and signIn function
 'use client'
 
+// import the useSession and signIn function from next-auth/react
 import { useSession, signIn } from "next-auth/react";
 
+// This is the main page of the application
 export default function Home() {
   const { data: session, status } = useSession();
 
+  // If the user is loading, show a loading message
   if (status === "loading") {
     return <div>Loading...</div>;
   }
 
+  // If the user is authenticated, show a welcome message
   if (status === "authenticated") {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
@@ -18,6 +23,7 @@ export default function Home() {
     );
   }
 
+  // If the user is not authenticated, show a login button
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-2xl font-bold">Welcome to SSO Project!</h1>
@@ -30,3 +36,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+
