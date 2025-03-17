@@ -43,6 +43,39 @@ The following environment variables are required:
 - [Auth0](https://auth0.com/) - Identity provider
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
 
+## Updating the Repository
+
+To send updates to your GitHub repository:
+
+1. Stage your changes:
+```bash
+git add .
+```
+
+2. Commit your changes with a descriptive message:
+```bash
+git commit -m "Your commit message describing the changes"
+```
+
+3. Push your changes to GitHub:
+```bash
+git push origin main
+```
+
+To check your changes before committing:
+```bash
+# See what files have changed
+git status
+
+# See the actual changes in the files
+git diff
+```
+
+To update your local repository with changes from GitHub:
+```bash
+git pull origin main
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
