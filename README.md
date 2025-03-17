@@ -78,6 +78,10 @@ git pull origin main
 
 ## Deploying to Vercel
 
+### Important: Environment Variables Setup
+
+Before deploying to Vercel, you must set up your environment variables. The build will fail if any required environment variables are missing.
+
 1. Push your code to GitHub
 
 2. Connect your GitHub repository to Vercel:
@@ -87,10 +91,10 @@ git pull origin main
    - Select the repository and branch
    - Click "Deploy"
 
-3. Configure Environment Variables in Vercel:
+3. Configure Environment Variables in Vercel (Required):
    - Go to your project settings in Vercel
    - Navigate to "Environment Variables"
-   - Add the following variables:
+   - Add the following variables with your actual values:
      ```
      AUTH0_CLIENT_ID=your_auth0_client_id
      AUTH0_CLIENT_SECRET=your_auth0_client_secret
@@ -98,6 +102,8 @@ git pull origin main
      NEXTAUTH_URL=https://your-app-name.vercel.app
      NEXTAUTH_SECRET=your_nextauth_secret
      ```
+   - Make sure to click "Save" after adding each variable
+   - Replace `your-app-name.vercel.app` with your actual Vercel deployment URL
 
 4. Configure Auth0 Application Settings:
    - Go to your Auth0 dashboard
@@ -127,6 +133,15 @@ git pull origin main
 5. Redeploy your application:
    - Go to your Vercel dashboard
    - Click "Redeploy" on your project
+   - Select "Redeploy with existing Build Cache"
+
+### Troubleshooting Deployment
+
+If you encounter build errors:
+1. Check that all environment variables are properly set in Vercel
+2. Verify that your Auth0 application settings are correctly configured
+3. Make sure your Vercel deployment URL matches the URLs in Auth0 settings
+4. Try clearing the build cache and redeploying
 
 ## Learn More
 
