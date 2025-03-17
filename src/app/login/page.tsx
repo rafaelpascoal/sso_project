@@ -5,39 +5,38 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await signIn("auth0", { callbackUrl: "/" });
+  const handleLogin = async () => {
+    try {
+      const result = await signIn("auth0", {
+        redirect: false,
+      });
+      
+      if (result?.error) {
+        setError(result.error);
+        console.error('Sign in error:', result.error);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('An error occurred during login');
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold">Log in</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col space-y-4"
+      <h1 className="text-2xl font-bold mb-4">Log in</h1>
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+      <button 
+        onClick={handleLogin}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          className="p-2 rounded border"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          className="p-2 rounded border"
-        />
-        <button type="submit" className="bg-blue-500 p-2 rounded text-white">
-          Login
-        </button>
-      </form>
+        Login with Auth0
+      </button>
     </div>
   );
 }

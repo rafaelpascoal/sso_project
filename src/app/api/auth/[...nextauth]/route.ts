@@ -33,6 +33,8 @@ const handler = NextAuth({
     },
     callbacks: {
         async redirect({ url, baseUrl }) {
+            console.log('Redirect callback - URL:', url);
+            console.log('Redirect callback - Base URL:', baseUrl);
             // Allows relative callback URLs
             if (url.startsWith("/")) return `${baseUrl}${url}`;
             // Allows callback URLs on the same origin
@@ -40,9 +42,13 @@ const handler = NextAuth({
             return baseUrl;
         },
         async session({ session, token }) {
+            console.log('Session callback - Session:', session);
             return session;
         },
         async jwt({ token, user, account }) {
+            console.log('JWT callback - Token:', token);
+            console.log('JWT callback - User:', user);
+            console.log('JWT callback - Account:', account);
             if (account && user) {
                 return {
                     ...token,
@@ -53,7 +59,7 @@ const handler = NextAuth({
             return token;
         },
     },
-    debug: process.env.NODE_ENV === 'development',
+    debug: true, // Enable debug logs
 });
 
 export { handler as GET, handler as POST }; 
