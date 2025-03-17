@@ -76,6 +76,58 @@ To update your local repository with changes from GitHub:
 git pull origin main
 ```
 
+## Deploying to Vercel
+
+1. Push your code to GitHub
+
+2. Connect your GitHub repository to Vercel:
+   - Go to [Vercel](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Select the repository and branch
+   - Click "Deploy"
+
+3. Configure Environment Variables in Vercel:
+   - Go to your project settings in Vercel
+   - Navigate to "Environment Variables"
+   - Add the following variables:
+     ```
+     AUTH0_CLIENT_ID=your_auth0_client_id
+     AUTH0_CLIENT_SECRET=your_auth0_client_secret
+     AUTH0_ISSUER=your_auth0_issuer_url
+     NEXTAUTH_URL=https://your-app-name.vercel.app
+     NEXTAUTH_SECRET=your_nextauth_secret
+     ```
+
+4. Configure Auth0 Application Settings:
+   - Go to your Auth0 dashboard
+   - Navigate to Applications > Your Application
+   - Add these URLs to your application settings:
+
+     Allowed Callback URLs:
+     ```
+     https://your-app-name.vercel.app/api/auth/callback/auth0
+     http://localhost:3000/api/auth/callback/auth0
+     ```
+
+     Allowed Logout URLs:
+     ```
+     https://your-app-name.vercel.app
+     http://localhost:3000
+     ```
+
+     Allowed Web Origins:
+     ```
+     https://your-app-name.vercel.app
+     http://localhost:3000
+     ```
+
+   Replace `your-app-name.vercel.app` with your actual Vercel deployment URL.
+
+5. Redeploy your application:
+   - Go to your Vercel dashboard
+   - Click "Redeploy" on your project
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
